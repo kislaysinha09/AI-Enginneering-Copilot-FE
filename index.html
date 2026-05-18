@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Engineering Copilot - RAG Intelligence Hub</title>
+  <!-- Google Fonts for premium modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/chat.css">
+</head>
+<body>
+
+  <!-- Cybernetic Glassmorphic Shell -->
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="logo-area">
+        <div class="logo-pulse"></div>
+        <div class="logo-text">
+          <span class="logo-highlight">AETHER</span> RAG
+        </div>
+      </div>
+      
+      <div class="status-indicator">
+        <span class="status-dot offline" id="server-status-dot"></span>
+        <span class="status-label" id="server-status-text">Connecting to Hub...</span>
+      </div>
+
+      <nav class="nav-links">
+        <button class="nav-btn active" data-view="dashboard">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="9" rx="1" />
+            <rect x="14" y="3" width="7" height="5" rx="1" />
+            <rect x="14" y="12" width="7" height="9" rx="1" />
+            <rect x="3" y="16" width="7" height="5" rx="1" />
+          </svg>
+          Dashboard
+        </button>
+        <button class="nav-btn" data-view="documents">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="17 8 12 3 7 8" />
+            <line x1="12" y1="3" x2="12" y2="15" />
+          </svg>
+          Document Manager
+        </button>
+        <button class="nav-btn" data-view="chat-direct">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+          </svg>
+          Direct Assistant
+        </button>
+        <button class="nav-btn" data-view="chat-rag">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+            <path d="M12 6v6l4 2" />
+            <circle cx="12" cy="12" r="3" stroke-dasharray="3 3" />
+          </svg>
+          Document Copilot
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <span class="version">v1.2.0-Alpha</span>
+        <span class="engine">OpenRouter Engine</span>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- ================= VIEW: DASHBOARD ================= -->
+      <section id="view-dashboard" class="view active">
+        <div class="view-header">
+          <h1>Control Center Overview</h1>
+          <p class="subtitle">Real-time status of your RAG-enabled neural context engine.</p>
+        </div>
+
+        <!-- Dashboard Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-icon-wrapper purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+              </svg>
+            </div>
+            <div class="stat-content">
+              <span class="stat-label">Ingested Files</span>
+              <span class="stat-val" id="stat-files-count">0</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-wrapper teal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+                <line x1="12" y1="22.08" x2="12" y2="12" />
+              </svg>
+            </div>
+            <div class="stat-content">
+              <span class="stat-label">Vector Chunks</span>
+              <span class="stat-val" id="stat-chunks-count">0</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-wrapper pink">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                <path d="M2 12h20" />
+              </svg>
+            </div>
+            <div class="stat-content">
+              <span class="stat-label">Vector Provider</span>
+              <span class="stat-val text-glow-teal">Pinecone Hub</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-icon-wrapper yellow">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />
+              </svg>
+            </div>
+            <div class="stat-content">
+              <span class="stat-label">Core Engine</span>
+              <span class="stat-val">Gemini 3 Flash</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard Content Split -->
+        <div class="dashboard-layout">
+          <!-- Ingestion Ledger -->
+          <div class="glass-panel ledger-panel">
+            <div class="panel-header">
+              <h2>Ingested Knowledge Base</h2>
+              <button class="action-link-btn" id="btn-go-to-upload">Manage Files →</button>
+            </div>
+            <div class="ledger-table-container">
+              <table class="ledger-table" id="dashboard-ledger-table">
+                <thead>
+                  <tr>
+                    <th>Document</th>
+                    <th>Format</th>
+                    <th>Semantic Chunks</th>
+                    <th>Processed On</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboard-ledger-body">
+                  <!-- Dynamic rows go here -->
+                  <tr class="empty-state">
+                    <td colspan="4" style="text-align: center; padding: 3rem 0; color: var(--text-sub);">
+                      <div class="empty-animation">📁</div>
+                      No files stored yet. Navigate to <strong>Document Manager</strong> to upload.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Quick Actions & System Info -->
+          <div class="dashboard-side-column">
+            <div class="glass-panel quick-actions-panel">
+              <h3>Direct Access Prompts</h3>
+              <div class="suggested-prompts vertical">
+                <button class="suggest-btn" data-query="Can you explain how semantic chunks are parsed?">
+                  <span>How are chunks parsed?</span>
+                  <span class="arrow">→</span>
+                </button>
+                <button class="suggest-btn" data-query="What kind of vector similarity search matches best?">
+                  <span>Vector Similarity Search</span>
+                  <span class="arrow">→</span>
+                </button>
+                <button class="suggest-btn" data-query="Generate a complete Express REST endpoint for search.">
+                  <span>Generate Express REST Endpoint</span>
+                  <span class="arrow">→</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="glass-panel status-details-panel">
+              <h3>Vector Index Information</h3>
+              <ul class="info-list">
+                <li>
+                  <span class="info-key">Index Dimensions</span>
+                  <span class="info-val">1536 (text-embedding-ada-002)</span>
+                </li>
+                <li>
+                  <span class="info-key">Region</span>
+                  <span class="info-val">AWS us-east-1</span>
+                </li>
+                <li>
+                  <span class="info-key">Metric Type</span>
+                  <span class="info-val">Cosine Similarity</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= VIEW: DOCUMENTS ================= -->
+      <section id="view-documents" class="view">
+        <div class="view-header">
+          <h1>Knowledge Ingestion Center</h1>
+          <p class="subtitle">Extract, chunk, embed, and store documents in the Pinecone vector index.</p>
+        </div>
+
+        <div class="ingestion-layout">
+          <!-- Upload Area & Processing Status -->
+          <div class="glass-panel upload-panel">
+            <h2>Ingest New Document</h2>
+            <p class="panel-desc">Supports PDF, Word (.docx, .doc), and plain text (.txt) up to 10MB.</p>
+
+            <form id="upload-form">
+              <div class="drag-zone" id="drop-zone">
+                <input type="file" id="file-input" name="file" accept=".pdf,.docx,.doc,.txt" required>
+                <div class="drag-zone-content">
+                  <svg class="upload-cloud-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21.2 15c.7-1.2 1-2.5.7-3.9-.5-2-2.4-3.5-4.5-3.5h-1.3C15.5 4.8 12.8 3 9.5 3 5.4 3 2 6.4 2 10.5c0 .5.1 1 .2 1.5-.4.7-.6 1.4-.6 2.2 0 2.2 1.8 4 4 4h12.5c1.8 0 3.2-1.4 3.2-3.2z" />
+                    <polyline points="16 11 12 7 8 11" />
+                    <line x1="12" y1="7" x2="12" y2="17" />
+                  </svg>
+                  <span class="drag-text">Drag and drop your file here, or <span class="accent">browse</span></span>
+                  <span class="drag-subtext" id="selected-file-name">No file chosen</span>
+                </div>
+              </div>
+
+              <div class="upload-actions">
+                <button type="submit" class="btn btn-primary btn-glow" id="btn-submit-upload" disabled>
+                  Process & Ingest Document
+                </button>
+              </div>
+            </form>
+
+            <!-- Real-time Ingestion Processing pipeline -->
+            <div class="processing-pipeline-wrapper hidden" id="processing-pipeline">
+              <h3>Ingestion Engine Processing...</h3>
+              <div class="pipeline-steps">
+                <div class="pipeline-step active" id="step-extract">
+                  <div class="step-indicator">
+                    <span class="step-dot"></span>
+                    <span class="step-check">✓</span>
+                  </div>
+                  <div class="step-details">
+                    <span class="step-title">Text Extraction</span>
+                    <span class="step-desc">Parsing document bytes and extracting character maps.</span>
+                  </div>
+                </div>
+
+                <div class="pipeline-step" id="step-chunk">
+                  <div class="step-indicator">
+                    <span class="step-dot"></span>
+                    <span class="step-check">✓</span>
+                  </div>
+                  <div class="step-details">
+                    <span class="step-title">Semantic Chunking</span>
+                    <span class="step-desc">Dividing text blocks into coherent, logical tokens.</span>
+                  </div>
+                </div>
+
+                <div class="pipeline-step" id="step-embed">
+                  <div class="step-indicator">
+                    <span class="step-dot"></span>
+                    <span class="step-check">✓</span>
+                  </div>
+                  <div class="step-details">
+                    <span class="step-title">Vector Calculations</span>
+                    <span class="step-desc">Running chunks through OpenAI embedding transformers.</span>
+                  </div>
+                </div>
+
+                <div class="pipeline-step" id="step-store">
+                  <div class="step-indicator">
+                    <span class="step-dot"></span>
+                    <span class="step-check">✓</span>
+                  </div>
+                  <div class="step-details">
+                    <span class="step-title">Pinecone Indexing</span>
+                    <span class="step-desc">Storing multi-dimensional arrays inside Pinecone.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Document Ledger / Ingestion Database -->
+          <div class="glass-panel manager-ledger-panel">
+            <div class="panel-header">
+              <h2>Document Ledger Database</h2>
+              <button class="btn btn-secondary btn-sm" id="btn-clear-ledger">Reset Database History</button>
+            </div>
+            
+            <div class="ledger-list" id="documents-ledger-list">
+              <!-- Dynamic Cards go here -->
+              <div class="empty-ledger-card">
+                <p>No documents found in registry.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= VIEW: DIRECT CHAT ================= -->
+      <section id="view-chat-direct" class="view">
+        <div class="view-header">
+          <h1>Direct AI Brain</h1>
+          <p class="subtitle">Interact with the core generative LLM without any injected document vectors.</p>
+        </div>
+
+        <div class="chat-container glass-panel">
+          <!-- Chat Messages viewport -->
+          <div class="chat-viewport" id="direct-chat-viewport">
+            <div class="ai-greeting">
+              <div class="ai-avatar-glow">A</div>
+              <h2>Welcome to Direct Brain AI</h2>
+              <p>I am your general engineering assistant. Ask me anything about programming, databases, algorithm design, or configuration. In this mode, I will query the generative LLM directly without searching your uploaded documents.</p>
+              
+              <div class="suggestions-heading">Suggested general engineering prompts:</div>
+              <div class="suggested-prompts grid">
+                <button class="suggest-btn" data-query="Explain the difference between SQL and Vector databases.">
+                  Difference between SQL & Vector DBs
+                </button>
+                <button class="suggest-btn" data-query="Write an asynchronous retry helper function in JavaScript.">
+                  Asynchronous retry helper JS
+                </button>
+                <button class="suggest-btn" data-query="How does a Transformer model calculate attention weights?">
+                  Transformer attention calculation
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Input Area -->
+          <div class="chat-input-bar">
+            <textarea class="chat-textarea" id="direct-chat-input" placeholder="Type your general engineering question here... (Press Shift+Enter for newline)"></textarea>
+            <button class="chat-send-btn" id="direct-chat-send-btn" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= VIEW: DOCUMENT RAG COPILOT ================= -->
+      <section id="view-chat-rag" class="view">
+        <div class="view-header">
+          <h1>Document RAG Copilot</h1>
+          <p class="subtitle">Query your personal knowledge database. Smart retrieval from your uploaded chunks with inline sources.</p>
+        </div>
+
+        <div class="chat-container glass-panel">
+          <!-- Chat Messages viewport -->
+          <div class="chat-viewport" id="rag-chat-viewport">
+            <div class="ai-greeting">
+              <div class="ai-avatar-glow teal">R</div>
+              <h2>Document Intelligence Copilot</h2>
+              <p>I am your RAG context-aware copilot. Ask questions regarding documents, textbooks, reports, or articles that you've processed. I will query Pinecone for the closest vector segments, construct a synthesis, and link the original source passages.</p>
+              
+              <div class="suggestions-heading">Ask questions based on your documents:</div>
+              <div class="suggested-prompts grid" id="rag-suggestions-grid">
+                <!-- Fallback suggestions -->
+                <button class="suggest-btn" data-query="What is the main topic covered in the uploaded document?">
+                  What is the document's main topic?
+                </button>
+                <button class="suggest-btn" data-query="Summarize the core arguments or structures mentioned in my files.">
+                  Summarize core arguments of my files
+                </button>
+                <button class="suggest-btn" data-query="Are there any code snippets or diagrams described in the texts?">
+                  Check for code snippets or diagrams
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Input Area -->
+          <div class="chat-input-bar">
+            <textarea class="chat-textarea" id="rag-chat-input" placeholder="Query your knowledge database... (e.g. 'What is the API timeout threshold in document X?')"></textarea>
+            <button class="chat-send-btn teal" id="rag-chat-send-btn" disabled>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="22" y1="2" x2="11" y2="13" />
+                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>

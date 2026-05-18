@@ -1,0 +1,16 @@
+{
+  "name": "ai-engineering-copilot-fe",
+  "version": "1.0.0",
+  "description": "High-fidelity cyber-dark SPA frontend for the RAG Copilot Intelligence Hub.",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8080",
+    "dev": "npx http-server -p 8080"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}

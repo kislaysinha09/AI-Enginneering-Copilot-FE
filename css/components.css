@@ -1,0 +1,678 @@
+/* ==========================================================================
+   AI ENGINEERING COPILOT - UI COMPONENTS STYLES
+   ========================================================================== */
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  border: 1px solid transparent;
+  transition: var(--transition-spring);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-purple) 0%, #574b90 100%);
+  color: var(--text-main);
+  box-shadow: 0 4px 15px rgba(108, 92, 231, 0.2);
+}
+
+.btn-primary:not(:disabled):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(108, 92, 231, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--border-color);
+  color: var(--text-main);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+}
+
+.btn-glow {
+  position: relative;
+}
+
+.btn-glow::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-teal));
+  border-radius: 14px;
+  z-index: -1;
+  opacity: 0;
+  transition: var(--transition-smooth);
+  filter: blur(8px);
+}
+
+.btn-glow:not(:disabled):hover::after {
+  opacity: 0.6;
+}
+
+.text-glow-teal {
+  color: var(--accent-teal) !important;
+  text-shadow: 0 0 10px var(--accent-teal-glow);
+}
+
+/* ==========================================================================
+   VIEW 1: DASHBOARD STATS & LEDGER
+   ========================================================================== */
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.stat-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: var(--transition-smooth);
+  box-shadow: var(--card-shadow);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-glow);
+  box-shadow: 0 12px 30px rgba(108, 92, 231, 0.08);
+}
+
+.stat-icon-wrapper {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-icon-wrapper svg {
+  width: 24px;
+  height: 24px;
+}
+
+.stat-icon-wrapper.purple {
+  background: rgba(108, 92, 231, 0.08);
+  color: var(--accent-purple);
+  border: 1px solid rgba(108, 92, 231, 0.15);
+}
+
+.stat-icon-wrapper.teal {
+  background: rgba(0, 222, 201, 0.08);
+  color: var(--accent-teal);
+  border: 1px solid rgba(0, 222, 201, 0.15);
+}
+
+.stat-icon-wrapper.pink {
+  background: rgba(255, 118, 117, 0.08);
+  color: var(--accent-pink);
+  border: 1px solid rgba(255, 118, 117, 0.15);
+}
+
+.stat-icon-wrapper.yellow {
+  background: rgba(253, 203, 110, 0.08);
+  color: var(--accent-yellow);
+  border: 1px solid rgba(253, 203, 110, 0.15);
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-sub);
+}
+
+.stat-val {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+/* Dashboard Split Grid */
+.dashboard-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .dashboard-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+.panel-header h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.action-link-btn {
+  background: transparent;
+  border: none;
+  color: var(--accent-teal);
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: var(--transition-smooth);
+}
+
+.action-link-btn:hover {
+  text-shadow: 0 0 10px var(--accent-teal-glow);
+  transform: translateX(3px);
+}
+
+/* Ingested Ledger Table */
+.ledger-table-container {
+  overflow-x: auto;
+  max-height: 400px;
+}
+
+.ledger-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.ledger-table th {
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border-color);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ledger-table td {
+  padding: 16px;
+  font-size: 0.9rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+  vertical-align: middle;
+}
+
+.ledger-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.ledger-table .doc-name {
+  font-weight: 600;
+  color: var(--text-main);
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ledger-table .badge {
+  display: inline-flex;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.badge-pdf { background: rgba(255, 118, 117, 0.12); color: var(--accent-pink); border: 1px solid rgba(255, 118, 117, 0.2); }
+.badge-doc { background: rgba(108, 92, 231, 0.12); color: var(--accent-purple); border: 1px solid rgba(108, 92, 231, 0.2); }
+.badge-txt { background: rgba(0, 222, 201, 0.12); color: var(--accent-teal); border: 1px solid rgba(0, 222, 201, 0.2); }
+
+.empty-animation {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  filter: grayscale(0.5);
+  opacity: 0.5;
+}
+
+/* Side Column widgets */
+.dashboard-side-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.quick-actions-panel h3, .status-details-panel h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: var(--text-main);
+}
+
+/* General Prompt Suggestions */
+.suggested-prompts {
+  display: flex;
+  gap: 10px;
+}
+
+.suggested-prompts.vertical {
+  flex-direction: column;
+}
+
+.suggest-btn {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  padding: 12px 16px;
+  border-radius: 12px;
+  color: var(--text-sub);
+  font-size: 0.88rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.suggest-btn:hover {
+  background: rgba(108, 92, 231, 0.04);
+  border-color: rgba(108, 92, 231, 0.25);
+  color: var(--text-main);
+  transform: translateY(-1px);
+}
+
+.suggest-btn .arrow {
+  color: var(--accent-purple);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: var(--transition-smooth);
+}
+
+.suggest-btn:hover .arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.info-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-list li {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.info-key {
+  color: var(--text-sub);
+}
+
+.info-val {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+/* ==========================================================================
+   VIEW 2: DOCUMENT MANAGER
+   ========================================================================== */
+
+.ingestion-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .ingestion-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel-desc {
+  font-size: 0.9rem;
+  color: var(--text-sub);
+  margin-top: -0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* File Drop Zone */
+.drag-zone {
+  border: 2px dashed rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.01);
+  border-radius: 14px;
+  padding: 3rem 2rem;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.drag-zone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.drag-zone:hover, .drag-zone.drag-active {
+  border-color: var(--accent-purple);
+  background: rgba(108, 92, 231, 0.03);
+  box-shadow: inset 0 0 20px rgba(108, 92, 231, 0.05);
+}
+
+.upload-cloud-icon {
+  width: 48px;
+  height: 48px;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+  transition: var(--transition-spring);
+}
+
+.drag-zone:hover .upload-cloud-icon {
+  color: var(--accent-purple);
+  transform: translateY(-4px) scale(1.05);
+  filter: drop-shadow(0 0 8px var(--accent-purple-glow));
+}
+
+.drag-text {
+  display: block;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.drag-text .accent {
+  color: var(--accent-purple);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.drag-subtext {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  word-break: break-all;
+}
+
+.upload-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.upload-actions .btn {
+  width: 100%;
+}
+
+/* Ingestion Processing Stepper Pipeline */
+.processing-pipeline-wrapper {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  animation: fade-in 0.4s ease;
+}
+
+.processing-pipeline-wrapper h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: var(--accent-teal);
+  text-shadow: 0 0 10px var(--accent-teal-glow);
+}
+
+.pipeline-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pipeline-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  opacity: 0.35;
+  transition: var(--transition-smooth);
+}
+
+.pipeline-step.active {
+  opacity: 1;
+}
+
+.pipeline-step.completed {
+  opacity: 0.9;
+}
+
+.step-indicator {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  background: var(--bg-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* Line connecting steps */
+.pipeline-step:not(:last-child) .step-indicator::after {
+  content: '';
+  position: absolute;
+  top: 24px;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  background: var(--border-color);
+  z-index: 1;
+}
+
+.pipeline-step.completed:not(:last-child) .step-indicator::after {
+  background: var(--accent-teal);
+}
+
+.step-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-muted);
+}
+
+.step-check {
+  display: none;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--accent-teal);
+}
+
+/* Active Step Styling */
+.pipeline-step.active .step-indicator {
+  border-color: var(--accent-purple);
+  box-shadow: 0 0 10px var(--accent-purple-glow);
+}
+
+.pipeline-step.active .step-dot {
+  background: var(--accent-purple);
+  animation: pulse-dot 1s infinite alternate;
+}
+
+/* Completed Step Styling */
+.pipeline-step.completed .step-indicator {
+  border-color: var(--accent-teal);
+  background: rgba(0, 222, 201, 0.05);
+}
+
+.pipeline-step.completed .step-dot {
+  display: none;
+}
+
+.pipeline-step.completed .step-check {
+  display: block;
+}
+
+.step-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.step-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.pipeline-step.active .step-title {
+  color: var(--accent-purple);
+}
+
+.pipeline-step.completed .step-title {
+  color: var(--text-main);
+}
+
+.step-desc {
+  font-size: 0.8rem;
+  color: var(--text-sub);
+}
+
+/* Document Ledger list on Upload page */
+.manager-ledger-panel {
+  display: flex;
+  flex-direction: column;
+  height: 600px;
+}
+
+.ledger-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  flex-grow: 1;
+  padding-right: 4px;
+  margin-top: 1rem;
+}
+
+.empty-ledger-card {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-muted);
+  border: 1px dashed var(--border-color);
+  border-radius: 12px;
+}
+
+.doc-ledger-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition-smooth);
+}
+
+.doc-ledger-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateY(-2px);
+}
+
+.doc-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 75%;
+}
+
+.doc-card-title {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.doc-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  font-size: 0.78rem;
+  color: var(--text-sub);
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.meta-accent {
+  color: var(--accent-teal);
+  font-weight: 600;
+}
+
+.btn-delete-doc {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 8px;
+  transition: var(--transition-smooth);
+}
+
+.btn-delete-doc:hover {
+  color: var(--accent-pink);
+  background: rgba(255, 118, 117, 0.1);
+}
+
+.btn-delete-doc svg {
+  width: 18px;
+  height: 18px;
+}
