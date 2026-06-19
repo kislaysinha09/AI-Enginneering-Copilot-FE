@@ -65,6 +65,7 @@ export function setupDocumentIngestion() {
       }
     });
   }
+loadDocumentsFromBackend();
 
   // Handle Form Submission / API call / Step Animations
   uploadForm.addEventListener('submit', async (e) => {
@@ -164,8 +165,14 @@ export function setupDocumentIngestion() {
         const formData = new FormData();
         formData.append('file', file);
 
+        const headers = {};
+        if (state.session?.access_token) {
+          headers['Authorization'] = `Bearer ${state.session.access_token}`;
+        }
+
         const res = await fetch(`${state.backendUrl}/api/documents/upload`, {
           method: 'POST',
+          headers: headers,
           body: formData
         });
 
@@ -274,15 +281,66 @@ export function renderDocumentLedger() {
   // Attach delete events
   const deleteButtons = ledgerList.querySelectorAll('.btn-delete-doc');
   deleteButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const targetIdx = parseInt(btn.getAttribute('data-index'));
-      state.documents.splice(targetIdx, 1);
-      localStorage.setItem('aether_rag_docs', JSON.stringify(state.documents));
-      renderDashboard();
-      renderDocumentLedger();
-    });
+      btn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const targetIdx = parseInt(btn.getAttribute('data-index'));
+        const doc = state.documents[targetIdx];
+        if (!doc) return;
+        try {
+          const headers = {};
+          if (state.session?.access_token) {
+            headers['Authorization'] = `Bearer ${state.session.access_token}`;
+          }
+
+          const res = await fetch(`${state.backendUrl}/api/documents/${encodeURIComponent(doc.name)}`, {
+            method: 'DELETE',
+            headers: headers
+          });
+          if (!res.ok) throw new Error('Deletion failed');
+        } catch (err) {
+          console.error('Backend delete error:', err);
+          alert('Failed to delete document on server');
+          return;
+        }
+        // Update local UI after successful backend deletion
+        state.documents.splice(targetIdx, 1);
+        localStorage.setItem('aether_rag_docs', JSON.stringify(state.documents));
+        renderDashboard();
+        renderDocumentLedger();
+      });
   });
+}
+
+async function loadDocumentsFromBackend() {
+  if (!state.session) {
+    console.warn('Postponing document ledger sync: No active session');
+    return;
+  }
+  try {
+    const headers = {
+      'Authorization': `Bearer ${state.session.access_token}`
+    };
+    const res = await fetch(`${state.backendUrl}/api/documents`, {
+      headers: headers
+    });
+    if (!res.ok) throw new Error('Failed to fetch documents');
+    const docs = await res.json();
+    // If backend returns documents, update state; otherwise keep existing state (likely from localStorage)
+    if (Array.isArray(docs) && docs.length > 0) {
+      state.documents = docs.map(doc => ({
+        name: doc.fileName,
+        size: doc.size || 'unknown',
+        type: doc.mimeType || 'application/octet-stream',
+        chunks: doc.totalChunks || 0,
+        date: doc.date || new Date().toISOString()
+      }));
+      localStorage.setItem('aether_rag_docs', JSON.stringify(state.documents));
+    }
+    renderDashboard();
+    renderDocumentLedger();
+  } catch (err) {
+    console.error('Initial sync error:', err);
+  }
 }
 
 function sleep(ms) {

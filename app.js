@@ -10,11 +10,14 @@ import { renderDashboard } from './js/components/dashboard.js';
 import { setupDocumentIngestion, renderDocumentLedger } from './js/components/manager.js';
 import { setupChats } from './js/components/chats.js';
 
+import { setupAuth } from './js/components/auth.js';
+
 // Expose state globally for browser console access & debugging comfort
 window.state = state;
 
 document.addEventListener('DOMContentLoaded', async () => {
   await loadEnv();
+  setupAuth();
   initLocalStorage();
   setupRouter();
   setupServerPing();

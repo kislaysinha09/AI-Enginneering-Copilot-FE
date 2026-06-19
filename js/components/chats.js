@@ -1,7 +1,7 @@
 /* ==========================================================================
    AI ENGINEERING COPILOT - CHAT WORKSPACE COMPONENT
    ========================================================================== */
-
+   
 import { state } from '../state.js';
 import { scrollToBottom } from '../router.js';
 
@@ -88,9 +88,14 @@ export function setupChats() {
     const typingId = appendTypingIndicator('direct');
 
     try {
+      const headers = { 'Content-Type': 'application/json' };
+      if (state.session?.access_token) {
+        headers['Authorization'] = `Bearer ${state.session.access_token}`;
+      }
+
       const response = await fetch(`${state.backendUrl}/api/ask`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: headers,
         body: JSON.stringify({ question: queryText })
       });
 
@@ -129,9 +134,14 @@ export function setupChats() {
     const typingId = appendTypingIndicator('rag');
 
     try {
+      const headers = { 'Content-Type': 'application/json' };
+      if (state.session?.access_token) {
+        headers['Authorization'] = `Bearer ${state.session.access_token}`;
+      }
+
       const response = await fetch(`${state.backendUrl}/api/query`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: headers,
         body: JSON.stringify({ query: queryText })
       });
 

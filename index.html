@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/chat.css">
+  <!-- Supabase CDN Client SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
 
@@ -69,6 +71,7 @@
       <div class="sidebar-footer">
         <span class="version">v1.2.0-Alpha</span>
         <span class="engine">OpenRouter Engine</span>
+        <button id="btn-sign-out" class="btn-signout">Sign Out</button>
       </div>
     </aside>
 
@@ -400,6 +403,45 @@
       </section>
 
     </main>
+  </div>
+
+  <!-- Cybernetic Glassmorphic Auth Overlay -->
+  <div id="auth-overlay" class="auth-overlay">
+    <div class="auth-card">
+      <div class="auth-logo"><span class="highlight">AETHER</span> CO-PILOT</div>
+      <div id="auth-subtitle" class="auth-subtitle">Sign in to initialize context engine</div>
+      
+      <form id="auth-form">
+        <div class="auth-group signup-only hidden">
+          <label for="auth-name">Full Name *</label>
+          <input type="text" id="auth-name" class="auth-input" placeholder="">
+        </div>
+        
+        <div class="auth-group signup-only hidden">
+          <label for="auth-phone">Phone Number</label>
+          <input type="tel" id="auth-phone" class="auth-input" placeholder="">
+        </div>
+
+        <div class="auth-group">
+          <label for="auth-email">Email Address</label>
+          <input type="email" id="auth-email" class="auth-input" placeholder="name@domain.com" required>
+        </div>
+        
+        <div class="auth-group">
+          <label for="auth-password">Security Password</label>
+          <input type="password" id="auth-password" class="auth-input" placeholder="••••••••" required>
+        </div>
+        
+        <button type="submit" id="btn-auth-submit" class="btn btn-primary btn-glow" style="width: 100%; margin-top: 1rem; padding: 12px;">
+          Access Context Engine
+        </button>
+      </form>
+      
+      <div class="auth-toggle-link">
+        <span id="auth-toggle-text">Need an account?</span>
+        <span id="btn-auth-toggle">Sign Up</span>
+      </div>
+    </div>
   </div>
 
   <script src="app.js" type="module"></script>

@@ -28,6 +28,14 @@ export async function loadEnv() {
       } else {
         console.error('Error: BACKEND_URL key is missing in the .env file!');
       }
+
+      if (env.SUPABASE_URL && env.SUPABASE_ANON_KEY) {
+        state.supabaseUrl = env.SUPABASE_URL;
+        state.supabaseAnonKey = env.SUPABASE_ANON_KEY;
+        console.log('Loaded Supabase configurations from .env');
+      } else {
+        console.warn('Warning: SUPABASE_URL or SUPABASE_ANON_KEY is missing in the .env file!');
+      }
     } else {
       console.error('Error: Failed to fetch the .env configuration file!');
     }
